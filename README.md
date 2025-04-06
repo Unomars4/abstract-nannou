@@ -24,7 +24,7 @@ A collection of generative art sketches written in rust using the nannou framewo
 ```bash
 git clone https://github.com/yourusername/generative-art-nannou.git
 cd generative-art-nannou
-cargo run --release```
+cargo run --release
 
 ---
 
