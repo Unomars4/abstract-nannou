@@ -17,13 +17,12 @@ A collection of generative art sketches written in rust using the nannou framewo
 ### Prerequisites
 
 - [Rust](https://www.rust-lang.org/tools/install)
-- A recent version of `nannou` (see `Cargo.toml`)
 
 ### Clone and Run
 
 ```bash
-git clone https://github.com/yourusername/generative-art-nannou.git
-cd generative-art-nannou
+git clone https://github.com/Unomars4/abstract-nannou.git
+cd abstract-nannou
 cargo run --release
 ```
 ---
