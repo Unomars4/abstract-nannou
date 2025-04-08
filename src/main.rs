@@ -8,8 +8,8 @@ fn model(app: &App) -> Model {
 
 fn update(_app: &App, _model: &mut Model, _update: Update) {}
 
-fn view(_app: &App, _model: &Model, frame: Frame) {
-    frame.clear(PURPLE);
+fn view(app: &App, _model: &Model, frame: Frame) {
+    frame.clear(NAVAJOWHITE);
 }
 
 fn main() {
