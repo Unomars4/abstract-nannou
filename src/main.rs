@@ -42,14 +42,17 @@ fn model(app: &App) -> Model {
 }
 
 fn update(_app: &App, model: &mut Model, _update: Update) {
+    let scale_factor = 0.02;
     for thing in model.things.iter_mut() {
         thing.pos += Vec2::new(
-            model
-                .noise
-                .get([thing.pos.x as f64, thing.pos.y as f64, 0.0]) as f32,
-            model
-                .noise
-                .get([thing.pos.x as f64, thing.pos.y as f64, 1.0]) as f32,
+            scale_factor
+                * model
+                    .noise
+                    .get([thing.pos.x as f64, thing.pos.y as f64, 0.0]) as f32,
+            scale_factor
+                * model
+                    .noise
+                    .get([thing.pos.x as f64, thing.pos.y as f64, 1.0]) as f32,
         );
     }
 }
