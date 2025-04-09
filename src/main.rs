@@ -62,7 +62,10 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
     let time = app.elapsed_frames() as f32 / 30.0;
-    draw.background().color(NAVAJOWHITE);
+
+    if app.elapsed_frames() == 1 {
+        draw.background().color(NAVAJOWHITE);
+    }
 
     for (idx, thing) in model.things.iter().enumerate() {
         let angle = idx as f32 * 0.1 * TAU + time;
