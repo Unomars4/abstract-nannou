@@ -21,7 +21,9 @@ fn model(app: &App) -> Model {
         .view(view)
         .build()
         .unwrap();
-    let things = Vec::new();
+    let mut things = Vec::new();
+    let thing = Thing::new(Vec2::new(0.0, 0.0));
+    things.push(thing);
     Model { things }
 }
 
