@@ -45,8 +45,8 @@ fn model(app: &App) -> Model {
 }
 
 fn update(app: &App, model: &mut Model, _update: Update) {
-    let time = app.elapsed_frames() as f32 / 20.0;
-    let scale_factor = 0.01 + time.cos() as f64 * 0.05;
+    let time = app.elapsed_frames() as f32 / 120.0;
+    let scale_factor = 0.01 + time.cos() as f64 * 0.005;
     for thing in model.things.iter_mut() {
         thing.positions.clear();
         thing.positions.push(Vec2::new(
