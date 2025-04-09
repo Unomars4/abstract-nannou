@@ -1,7 +1,7 @@
 use nannou::prelude::*;
 
 struct Model {
-    _window: window::Id,
+    things: Vec<Thing>,
 }
 
 struct Thing {
@@ -21,7 +21,8 @@ fn model(app: &App) -> Model {
         .view(view)
         .build()
         .unwrap();
-    Model { _window }
+    let things = Vec::new();
+    Model { things }
 }
 
 fn update(_app: &App, _model: &mut Model, _update: Update) {}
