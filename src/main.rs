@@ -1,6 +1,6 @@
 use nannou::prelude::*;
 
-const N_THINGS: usize = 2000;
+const N_THINGS: usize = 1000;
 
 struct Model {
     things: Vec<Thing>,
