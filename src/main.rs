@@ -61,15 +61,18 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
 
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
-    let time = app.elapsed_frames() as f32 / 60.0;
+    let time = app.elapsed_frames() as f32 / 20.0;
 
     if app.elapsed_frames() == 1 {
-        draw.background().color(NAVAJOWHITE);
+        draw.background().color(BLACK);
     }
+    draw.rect()
+        .w_h(1024.0, 1024.0)
+        .color(srgba(0.0, 0.0, 0.0, 0.1));
 
     for (idx, thing) in model.things.iter().enumerate() {
         let angle = idx as f32 * 0.1 * TAU + time;
-        draw.ellipse().xy(thing.pos).radius(5.0).color(GRAY);
+        draw.ellipse().xy(thing.pos).radius(5.0).color(WHITE);
     }
     draw.to_frame(app, &frame).unwrap();
 }
