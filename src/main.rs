@@ -11,12 +11,14 @@ struct Model {
 }
 
 struct Thing {
-    pos: Vec2,
+    positions: Vec<Vec2>,
 }
 
 impl Thing {
     pub fn new(pos: Vec2) -> Self {
-        Self { pos }
+        let mut positions = Vec::new();
+        positions.push(pos);
+        Self { positions }
     }
 }
 
@@ -44,18 +46,21 @@ fn model(app: &App) -> Model {
 fn update(_app: &App, model: &mut Model, _update: Update) {
     let scale_factor = 0.01;
     for thing in model.things.iter_mut() {
-        thing.pos += Vec2::new(
-            model.noise.get([
-                scale_factor * thing.pos.x as f64,
-                scale_factor * thing.pos.y as f64,
-                0.0,
-            ]) as f32,
-            model.noise.get([
-                scale_factor * thing.pos.x as f64,
-                scale_factor * thing.pos.y as f64,
-                1.0,
-            ]) as f32,
-        );
+        let last = thing.positions[0];
+        let new = last
+            + Vec2::new(
+                model.noise.get([
+                    scale_factor * last.x as f64,
+                    scale_factor * last.y as f64,
+                    0.0,
+                ]) as f32,
+                model.noise.get([
+                    scale_factor * last.x as f64,
+                    scale_factor * last.y as f64,
+                    1.0,
+                ]) as f32,
+            );
+        thing.positions.insert(0, new);
     }
 }
 
@@ -72,7 +77,10 @@ fn view(app: &App, model: &Model, frame: Frame) {
 
     for (idx, thing) in model.things.iter().enumerate() {
         let angle = idx as f32 * 0.1 * TAU + time;
-        draw.ellipse().xy(thing.pos).radius(5.0).color(WHITE);
+        draw.ellipse()
+            .xy(thing.positions[idx])
+            .radius(5.0)
+            .color(WHITE);
     }
     draw.to_frame(app, &frame).unwrap();
 }
