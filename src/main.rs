@@ -44,8 +44,9 @@ fn model(app: &App) -> Model {
     Model { things, noise }
 }
 
-fn update(_app: &App, model: &mut Model, _update: Update) {
-    let scale_factor = 0.01;
+fn update(app: &App, model: &mut Model, _update: Update) {
+    let time = app.elapsed_frames() as f32 / 20.0;
+    let scale_factor = 0.01 + time.cos() as f64 * 0.05;
     for thing in model.things.iter_mut() {
         thing.positions.clear();
         thing.positions.push(Vec2::new(
