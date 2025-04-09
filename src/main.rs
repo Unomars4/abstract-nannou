@@ -1,9 +1,13 @@
-use nannou::prelude::*;
+use nannou::{
+    noise::{NoiseFn, Perlin},
+    prelude::*,
+};
 
 const N_THINGS: usize = 1000;
 
 struct Model {
     things: Vec<Thing>,
+    noise: Perlin,
 }
 
 struct Thing {
@@ -24,6 +28,7 @@ fn model(app: &App) -> Model {
         .build()
         .unwrap();
     let mut things = Vec::new();
+    let noise = Perlin::new();
 
     for i in 0..N_THINGS {
         let thing = Thing::new(Vec2::new(
@@ -33,12 +38,19 @@ fn model(app: &App) -> Model {
         things.push(thing);
     }
 
-    Model { things }
+    Model { things, noise }
 }
 
 fn update(_app: &App, model: &mut Model, _update: Update) {
     for thing in model.things.iter_mut() {
-        thing.pos += Vec2::new(random::<f32>() - 0.5, random::<f32>() - 0.5);
+        thing.pos += Vec2::new(
+            model
+                .noise
+                .get([thing.pos.x as f64, thing.pos.y as f64, 0.0]) as f32,
+            model
+                .noise
+                .get([thing.pos.x as f64, thing.pos.y as f64, 1.0]) as f32,
+        );
     }
 }
 
