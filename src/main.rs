@@ -61,7 +61,7 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
 
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
-    let time = app.elapsed_frames() as f32 / 60.0;
+    let time = app.elapsed_frames() as f32 / 30.0;
     draw.background().color(NAVAJOWHITE);
 
     for (idx, thing) in model.things.iter().enumerate() {
