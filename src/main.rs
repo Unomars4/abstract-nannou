@@ -36,7 +36,11 @@ fn model(app: &App) -> Model {
     Model { things }
 }
 
-fn update(_app: &App, _model: &mut Model, _update: Update) {}
+fn update(_app: &App, model: &mut Model, _update: Update) {
+    for thing in model.things.iter_mut() {
+        thing.pos += Vec2::new(1.0, 0.0);
+    }
+}
 
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
