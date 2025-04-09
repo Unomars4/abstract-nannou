@@ -29,15 +29,15 @@ fn model(app: &App) -> Model {
 
 fn update(_app: &App, _model: &mut Model, _update: Update) {}
 
-fn view(app: &App, _model: &Model, frame: Frame) {
+fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
     let time = app.elapsed_frames() as f32 / 60.0;
     draw.background().color(NAVAJOWHITE);
 
-    for i in 0..10 {
-        let angle = i as f32 * 0.1 * TAU + time;
+    for (idx, thing) in model.things.iter().enumerate() {
+        let angle = idx as f32 * 0.1 * TAU + time;
         draw.ellipse()
-            .x_y(100.0 * angle.cos(), 100.0 * angle.sin())
+            .x_y(thing.pos.x * angle.cos(), thing.pos.y * angle.sin())
             .color(GRAY);
     }
     draw.to_frame(app, &frame).unwrap();
