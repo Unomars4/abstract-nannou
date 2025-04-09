@@ -1,20 +1,23 @@
 use nannou::prelude::*;
 
-struct Model {}
+struct Model {
+    _window: window::Id,
+}
 
-// fn model(app: &App) -> Model {
-//     Model {}
-// }
-//
-// fn update(_app: &App, _model: &mut Model, _update: Update) {}
-//
-fn view(app: &App, frame: Frame) {
+fn model(app: &App) -> Model {
+    let _window = app.new_window().view(view).build().unwrap();
+    Model { _window }
+}
+
+fn update(_app: &App, _model: &mut Model, _update: Update) {}
+
+fn view(app: &App, _model: &Model, frame: Frame) {
     let draw = app.draw();
-
     draw.background().color(NAVAJOWHITE);
+    draw.ellipse().color(GRAY);
     draw.to_frame(app, &frame).unwrap();
 }
 
 fn main() {
-    nannou::sketch(view).run();
+    nannou::app(model).update(update).simple_window(view).run();
 }
