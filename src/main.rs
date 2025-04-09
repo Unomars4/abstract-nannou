@@ -1,5 +1,7 @@
 use nannou::prelude::*;
 
+const N_THINGS: usize = 2000;
+
 struct Model {
     things: Vec<Thing>,
 }
@@ -22,8 +24,15 @@ fn model(app: &App) -> Model {
         .build()
         .unwrap();
     let mut things = Vec::new();
-    let thing = Thing::new(Vec2::new(0.0, 0.0));
-    things.push(thing);
+
+    for i in 0..N_THINGS {
+        let thing = Thing::new(Vec2::new(
+            (random::<f32>() - 0.5) * 1024.0,
+            (random::<f32>() - 0.5) * 1024.0,
+        ));
+        things.push(thing);
+    }
+
     Model { things }
 }
 
