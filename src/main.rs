@@ -3,7 +3,7 @@ use nannou::{
     prelude::*,
 };
 
-const N_THINGS: usize = 1000;
+const N_THINGS: usize = 2000;
 
 struct Model {
     things: Vec<Thing>,
@@ -42,7 +42,7 @@ fn model(app: &App) -> Model {
 }
 
 fn update(_app: &App, model: &mut Model, _update: Update) {
-    let scale_factor = 0.02;
+    let scale_factor = 0.01;
     for thing in model.things.iter_mut() {
         thing.pos += Vec2::new(
             model.noise.get([
@@ -61,7 +61,7 @@ fn update(_app: &App, model: &mut Model, _update: Update) {
 
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
-    let time = app.elapsed_frames() as f32 / 30.0;
+    let time = app.elapsed_frames() as f32 / 60.0;
 
     if app.elapsed_frames() == 1 {
         draw.background().color(NAVAJOWHITE);
