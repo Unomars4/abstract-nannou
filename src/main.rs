@@ -22,7 +22,7 @@ fn model(app: &App) -> Model {
         .build()
         .unwrap();
     let mut things = Vec::new();
-    let thing = Thing::new(Vec2::new(100.0, 100.0));
+    let thing = Thing::new(Vec2::new(0.0, 0.0));
     things.push(thing);
     Model { things }
 }
