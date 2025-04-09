@@ -36,9 +36,7 @@ fn view(app: &App, model: &Model, frame: Frame) {
 
     for (idx, thing) in model.things.iter().enumerate() {
         let angle = idx as f32 * 0.1 * TAU + time;
-        draw.ellipse()
-            .x_y(thing.pos.x * angle.cos(), thing.pos.y * angle.sin())
-            .color(GRAY);
+        draw.ellipse().xy(thing.pos).radius(5.0).color(GRAY);
     }
     draw.to_frame(app, &frame).unwrap();
 }
