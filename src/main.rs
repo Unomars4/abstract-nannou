@@ -4,6 +4,16 @@ struct Model {
     _window: window::Id,
 }
 
+struct Thing {
+    pos: Vec2,
+}
+
+impl Thing {
+    pub fn new(pos: Vec2) -> Self {
+        Self { pos }
+    }
+}
+
 fn model(app: &App) -> Model {
     let _window = app
         .new_window()
