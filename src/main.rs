@@ -1,4 +1,5 @@
 use nannou::{
+    lyon::geom::euclid::vec2,
     noise::{NoiseFn, Perlin},
     prelude::*,
 };
@@ -46,21 +47,28 @@ fn model(app: &App) -> Model {
 fn update(_app: &App, model: &mut Model, _update: Update) {
     let scale_factor = 0.01;
     for thing in model.things.iter_mut() {
-        let last = thing.positions[0];
-        let new = last
-            + Vec2::new(
-                model.noise.get([
-                    scale_factor * last.x as f64,
-                    scale_factor * last.y as f64,
-                    0.0,
-                ]) as f32,
-                model.noise.get([
-                    scale_factor * last.x as f64,
-                    scale_factor * last.y as f64,
-                    1.0,
-                ]) as f32,
-            );
-        thing.positions.insert(0, new);
+        thing.positions.clear();
+        thing.positions.push(Vec2::new(
+            (random::<f32>() - 0.5) * 1024.0,
+            (random::<f32>() - 0.5) * 1024.0,
+        ));
+        for i in 0..50 {
+            let last = thing.positions[0];
+            let new = last
+                + Vec2::new(
+                    model.noise.get([
+                        scale_factor * last.x as f64,
+                        scale_factor * last.y as f64,
+                        0.0,
+                    ]) as f32,
+                    model.noise.get([
+                        scale_factor * last.x as f64,
+                        scale_factor * last.y as f64,
+                        1.0,
+                    ]) as f32,
+                );
+            thing.positions.insert(0, new);
+        }
     }
 }
 
@@ -75,11 +83,9 @@ fn view(app: &App, model: &Model, frame: Frame) {
         .w_h(1024.0, 1024.0)
         .color(srgba(0.0, 0.0, 0.0, 0.1));
 
-    for (idx, thing) in model.things.iter().enumerate() {
-        let angle = idx as f32 * 0.1 * TAU + time;
-        draw.ellipse()
-            .xy(thing.positions[idx])
-            .radius(5.0)
+    for thing in model.things.iter() {
+        draw.polyline()
+            .points(thing.positions.iter().cloned())
             .color(WHITE);
     }
     draw.to_frame(app, &frame).unwrap();
