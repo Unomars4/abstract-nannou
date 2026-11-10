@@ -1,5 +1,4 @@
 use nannou::{
-    lyon::geom::euclid::vec2,
     noise::{NoiseFn, Perlin},
     prelude::*,
 };
@@ -33,7 +32,7 @@ fn model(app: &App) -> Model {
     let mut things = Vec::new();
     let noise = Perlin::new();
 
-    for i in 0..N_THINGS {
+    for _i in 0..N_THINGS {
         let thing = Thing::new(Vec2::new(
             (random::<f32>() - 0.5) * 1024.0,
             (random::<f32>() - 0.5) * 1024.0,
@@ -53,7 +52,7 @@ fn update(app: &App, model: &mut Model, _update: Update) {
             (random::<f32>() - 0.5) * 1024.0,
             (random::<f32>() - 0.5) * 1024.0,
         ));
-        for i in 0..50 {
+        for _i in 0..50 {
             let last = thing.positions[0];
             let new = last
                 + Vec2::new(
@@ -75,7 +74,7 @@ fn update(app: &App, model: &mut Model, _update: Update) {
 
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
-    let time = app.elapsed_frames() as f32 / 20.0;
+    let _time = app.elapsed_frames() as f32 / 20.0;
 
     if app.elapsed_frames() == 1 {
         draw.background().color(BLACK);
